@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1703.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerkutBotTelegramGateway", "BerkutBotTelegramGateway\BerkutBotTelegramGateway.csproj", "{FC014F3F-1367-4AF0-81A7-4E40A5546351}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56373AF2-32DA-412E-9A01-F2FFD64E40B7}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC014F3F-1367-4AF0-81A7-4E40A5546351}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC014F3F-1367-4AF0-81A7-4E40A5546351}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC014F3F-1367-4AF0-81A7-4E40A5546351}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC014F3F-1367-4AF0-81A7-4E40A5546351}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BC543A2C-D238-4D2A-ADEB-BC02DECFE700}
+	EndGlobalSection
+EndGlobal
