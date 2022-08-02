@@ -31,13 +31,14 @@ namespace BerkutBotTelegramGateway
                 new TelegramBotClient(provider.GetService<IOptions<BotOptions>>().Value.Token));
             builder.Services.AddTransient<ITgMessageFactory, TgMessageFactory>();
             builder.Services.AddTransient<IServiceBusMessageFactory, ServiceBusMessageFactory>();
+            builder.Services.Configure<ServiceBusOptions>(_functionConfig.GetSection("ServiceBusOptions"));
 
             builder.Services.AddAzureClients(clientBuilder =>
             {
-                builder.Services.Configure<ServiceBusOptions>(_functionConfig.GetSection("ServiceBusOptions"));
                 var provider = builder.Services.BuildServiceProvider();
 
-                clientBuilder.AddServiceBusClient(provider.GetRequiredService<IOptions<ServiceBusOptions>>().Value.ConnectionString);
+                clientBuilder.UseCredential(new DefaultAzureCredential());
+                clientBuilder.AddServiceBusClientWithNamespace(provider.GetRequiredService<IOptions<ServiceBusOptions>>().Value.FullyQualifiedNamespace);
             });
         }
     }
