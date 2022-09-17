@@ -19,18 +19,15 @@ namespace BerkutBotTelegramGateway
     public class BerkutBotTelegramGateway
     {
         private readonly ServiceBusClient _serviceBusClient;
-        private readonly ITgMessageFactory _tgMessageFactory;
         private readonly IServiceBusMessageFactory _serviceBusMessageFactory;
         private readonly ServiceBusOptions _options;
 
         public BerkutBotTelegramGateway(
             ServiceBusClient serviceBusClient,
             IOptions<ServiceBusOptions> options,
-            ITgMessageFactory tgMessageFactory,
             IServiceBusMessageFactory serviceBusMessageFactory)
         {
             _serviceBusClient = serviceBusClient;
-            _tgMessageFactory = tgMessageFactory;
             _serviceBusMessageFactory = serviceBusMessageFactory;
             _options = options.Value;
         }
@@ -43,17 +40,12 @@ namespace BerkutBotTelegramGateway
             string messageString = incomingTgMessage.ToJson();
             log.LogInformation($"Update received: {messageString}");
 
-            Message processingMessage = _tgMessageFactory.GetMessage(incomingTgMessage);
-
-            if (processingMessage is null) return new OkObjectResult($"Unsupported message type: {incomingTgMessage.Type}");
-
             try
             {
                 await using ServiceBusSender sender = _serviceBusClient.CreateSender(_options.MessageProcessorTopic);
-
-                ServiceBusMessage serviceBusMessage = _serviceBusMessageFactory.GetMessage(processingMessage);
-
+                ServiceBusMessage serviceBusMessage = _serviceBusMessageFactory.GetMessage(incomingTgMessage);
                 await sender.SendMessageAsync(serviceBusMessage);
+
                 return new OkResult();
             }
             catch (Exception ex)

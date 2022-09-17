@@ -8,10 +8,18 @@ namespace BerkutBotTelegramGateway.Infrastructure
 {
     public class ServiceBusMessageFactory : IServiceBusMessageFactory
     {
-        public ServiceBusMessage GetMessage(Message message)
+        private readonly ITgMessageFactory _tgMessageFactory;
+
+        public ServiceBusMessageFactory(ITgMessageFactory tgMessageFactory)
         {
-            ServiceBusMessage serviceBusMessage = new ServiceBusMessage(message.ToJson());
-            serviceBusMessage.SessionId = message.Chat.Id.ToString();
+            _tgMessageFactory = tgMessageFactory;
+        }
+
+        public ServiceBusMessage GetMessage(Update update)
+        {
+            var tgMessage = _tgMessageFactory.GetMessage(update);
+            ServiceBusMessage serviceBusMessage = new ServiceBusMessage(update.ToJson());
+            serviceBusMessage.SessionId = tgMessage.Chat.Id.ToString();
 
             return serviceBusMessage;
         }

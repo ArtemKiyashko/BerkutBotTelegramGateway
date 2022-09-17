@@ -7,7 +7,7 @@ namespace BerkutBotTelegramGateway.Infrastructure
 {
     public interface IServiceBusMessageFactory
     {
-        public ServiceBusMessage GetMessage(Message message);
+        public ServiceBusMessage GetMessage(Update update);
     }
 }
 
