@@ -17,9 +17,9 @@ namespace BerkutBotTelegramGateway.Infrastructure
 
         public ServiceBusMessage GetMessage(Update update)
         {
-            var tgMessage = _tgMessageFactory.GetMessage(update);
+            var tgChat = _tgMessageFactory.GetChat(update);
             ServiceBusMessage serviceBusMessage = new ServiceBusMessage(update.ToJson());
-            serviceBusMessage.SessionId = tgMessage.Chat.Id.ToString();
+            serviceBusMessage.SessionId = tgChat.Id.ToString();
 
             return serviceBusMessage;
         }
