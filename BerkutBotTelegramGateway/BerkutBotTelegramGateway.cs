@@ -32,7 +32,7 @@ namespace BerkutBotTelegramGateway
             _options = options.Value;
         }
 
-        [FunctionName("processTgMessage")]
+        [FunctionName("ProcessTgMessage")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = null)] Update incomingTgMessage,
             ILogger log)
